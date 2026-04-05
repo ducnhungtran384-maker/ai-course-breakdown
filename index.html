@@ -232,6 +232,9 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.2);
             transition: transform 0.3s ease;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .vinyl-disc:hover {
@@ -242,9 +245,76 @@
             animation: spin 3s linear infinite;
         }
 
+        /* 暂停按钮 */
+        .pause-icon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .vinyl-disc.playing .pause-icon {
+            display: flex;
+        }
+
+        .pause-icon::before,
+        .pause-icon::after {
+            content: '';
+            width: 3px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 2px;
+        }
+
+        .pause-icon::before {
+            margin-right: 4px;
+        }
+
+        /* 播放按钮 */
+        .play-icon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .vinyl-disc.playing .play-icon {
+            display: none;
+        }
+
+        .play-icon::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 10px solid #667eea;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            margin-left: 3px;
+        }
+
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        /* 脉冲动画 */
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.2); }
+            50% { box-shadow: 0 8px 40px rgba(102, 126, 234, 0.6), inset 0 0 30px rgba(255,255,255,0.3); }
+        }
+
+        .vinyl-disc.playing {
+            animation: spin 3s linear infinite, pulse 2s ease-in-out infinite;
         }
 
         /* 滚动动画 */
@@ -291,9 +361,12 @@
     <!-- 音频播放器 - 唱片效果 -->
     <div class="audio-player" onclick="toggleVinyl()">
         <div class="vinyl-container">
-            <div class="vinyl-disc" id="vinyl-disc"></div>
+            <div class="vinyl-disc playing" id="vinyl-disc">
+                <div class="play-icon"></div>
+                <div class="pause-icon"></div>
+            </div>
         </div>
-        <audio id="audio-element" src="background-music.mp3" preload="auto"></audio>
+        <audio id="audio-element" src="background-music.mp3" preload="auto" autoplay loop></audio>
     </div>
 
     <script>
@@ -398,10 +471,9 @@
 
         // 页面加载后自动播放
         window.addEventListener('load', () => {
-            audioElement.play().then(() => {
-                vinylDisc.classList.add('playing');
-            }).catch(err => {
-                console.log('自动播放被浏览器阻止，需要用户交互');
+            audioElement.play().catch(err => {
+                console.log('自动播放被浏览器阻止，点击唱片开始播放');
+                vinylDisc.classList.remove('playing');
             });
         });
 
