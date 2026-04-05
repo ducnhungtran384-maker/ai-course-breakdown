@@ -4,7 +4,7 @@
 
 ## 🌟 在线演示
 
-访问：`https://你的用户名.github.io/ai-course-breakdown/`
+**访问地址**: https://ducnhungtran384-maker.github.io/ai-course-breakdown/
 
 ## ✨ 特性
 
@@ -46,7 +46,7 @@
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/你的用户名/ai-course-breakdown.git
+git clone https://github.com/ducnhungtran384-maker/ai-course-breakdown.git
 cd ai-course-breakdown
 ```
 
@@ -59,7 +59,7 @@ cd ai-course-breakdown
 3. Source 选择 **Deploy from a branch**
 4. Branch 选择 **main**，目录选择 **/ (root)**
 5. 点击 **Save**
-6. 等待几分钟后访问 `https://你的用户名.github.io/ai-course-breakdown/`
+6. 等待几分钟后访问 `https://ducnhungtran384-maker.github.io/ai-course-breakdown/`
 
 ## 🎯 使用说明
 
