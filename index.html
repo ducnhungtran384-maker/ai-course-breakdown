@@ -220,81 +220,26 @@
 
         .vinyl-container {
             position: relative;
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
         }
 
         .vinyl-disc {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at center,
-                #1a1a1a 0%,
-                #1a1a1a 20%,
-                #2d2d2d 20%,
-                #2d2d2d 25%,
-                #1a1a1a 25%,
-                #1a1a1a 30%,
-                #2d2d2d 30%,
-                #2d2d2d 35%,
-                #1a1a1a 35%,
-                #1a1a1a 100%);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5),
-                        inset 0 0 20px rgba(0,0,0,0.8);
+            background: linear-gradient(135deg, #4a90e2 0%, #7b68ee 50%, #9370db 100%);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.2);
             transition: transform 0.3s ease;
             position: relative;
         }
 
         .vinyl-disc:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .vinyl-disc.playing {
             animation: spin 3s linear infinite;
-        }
-
-        .vinyl-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-        }
-
-        .vinyl-label {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #1a1a1a;
-        }
-
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .vinyl-container:hover .play-icon {
-            opacity: 1;
-        }
-
-        .vinyl-disc.playing + .play-icon {
-            opacity: 0 !important;
         }
 
         @keyframes spin {
@@ -346,12 +291,7 @@
     <!-- 音频播放器 - 唱片效果 -->
     <div class="audio-player" onclick="toggleVinyl()">
         <div class="vinyl-container">
-            <div class="vinyl-disc" id="vinyl-disc">
-                <div class="vinyl-center">
-                    <div class="vinyl-label"></div>
-                </div>
-            </div>
-            <div class="play-icon" id="play-icon">▶️</div>
+            <div class="vinyl-disc" id="vinyl-disc"></div>
         </div>
         <audio id="audio-element" src="background-music.mp3" preload="auto"></audio>
     </div>
@@ -455,23 +395,28 @@
         // 音频控制 - 唱片效果
         let audioElement = document.getElementById('audio-element');
         let vinylDisc = document.getElementById('vinyl-disc');
-        let playIcon = document.getElementById('play-icon');
+
+        // 页面加载后自动播放
+        window.addEventListener('load', () => {
+            audioElement.play().then(() => {
+                vinylDisc.classList.add('playing');
+            }).catch(err => {
+                console.log('自动播放被浏览器阻止，需要用户交互');
+            });
+        });
 
         function toggleVinyl() {
             if (audioElement.paused) {
                 audioElement.play();
                 vinylDisc.classList.add('playing');
-                playIcon.textContent = '⏸️';
             } else {
                 audioElement.pause();
                 vinylDisc.classList.remove('playing');
-                playIcon.textContent = '▶️';
             }
         }
 
         audioElement.addEventListener('ended', () => {
             vinylDisc.classList.remove('playing');
-            playIcon.textContent = '▶️';
         });
     </script>
     <div class="container">
