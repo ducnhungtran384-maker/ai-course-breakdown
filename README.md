@@ -8,12 +8,6 @@
 
 ---
 
-## 📄 经典版本
-
-**访问地址**: https://ducnhungtran384-maker.github.io/ai-course-breakdown/02_第二天/index.html
-
-> 一个交互式的课程内容展示页面，采用道法术器框架深度拆解AI实战营课程内容
-
 ## ✨ 特性
 
 - 🎨 **炫酷视觉效果**
