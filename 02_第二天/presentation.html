@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI实战营第二节课·道法术器拆解</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+/* ===========================================
+   VIEWPORT FITTING: MANDATORY BASE STYLES
+   =========================================== */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    overflow: hidden;
+    padding: var(--slide-padding);
+}
+
+:root {
+    --title-size: clamp(1.5rem, 5vw, 4rem);
+    --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+    --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+    --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+    --small-size: clamp(0.65rem, 1vw, 0.875rem);
+    --slide-padding: clamp(1rem, 4vw, 4rem);
+    --content-gap: clamp(0.5rem, 2vw, 2rem);
+    --element-gap: clamp(0.25rem, 1vw, 1rem);
+}
+
+@media (max-height: 700px) {
+    :root {
+        --slide-padding: clamp(0.75rem, 3vw, 2rem);
+        --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+        --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+        --h2-size: clamp(1rem, 3vw, 1.75rem);
+    }
+}
+
+@media (max-height: 600px) {
+    :root {
+        --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+        --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+        --title-size: clamp(1.1rem, 4vw, 2rem);
+        --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+    }
+    .nav-dots { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+    html { scroll-behavior: auto; }
+}
+
+/* ===========================================
+   BOLD SIGNAL THEME
+   =========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    color: #ffffff;
+}
+
+h1, h2, h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 900;
+}
+
+/* Navigation Dots */
+.nav-dots {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    background: #FF5722;
+    transform: scale(1.5);
+}
+
+/* Slide Number */
+.slide-number {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-family: 'Archivo Black', sans-serif;
+    color: rgba(255, 255, 255, 0.05);
+    line-height: 1;
+    z-index: 1;
+}
+
+/* Title Slide */
+.title-slide {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.title-card {
+    background: #FF5722;
+    color: #1a1a1a;
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: 20px;
+    max-width: 900px;
+    animation: slideUp 1s ease-out;
+}
+
+.title-card h1 {
+    font-size: var(--title-size);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.title-card .subtitle {
+    font-size: var(--body-size);
+    opacity: 0.9;
+    margin-top: 1rem;
+}
+
+.title-card .meta {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(26, 26, 26, 0.2);
+    font-size: var(--small-size);
+}
+
+/* Content Slides */
+.content-slide {
+    background: #1a1a1a;
+}
+
+.content-slide h2 {
+    font-size: var(--h2-size);
+    margin-bottom: var(--content-gap);
+    color: #FF5722;
+}
+
+.content-slide h3 {
+    font-size: var(--h3-size);
+    margin-bottom: var(--element-gap);
+    margin-top: calc(var(--content-gap) * 0.5);
+}
+
+.content-slide p {
+    font-size: var(--body-size);
+    line-height: 1.6;
+    margin-bottom: var(--element-gap);
+    opacity: 0.9;
+}
+
+.content-slide ul {
+    list-style: none;
+    padding: 0;
+    margin: var(--element-gap) 0;
+}
+
+.content-slide li {
+    font-size: var(--body-size);
+    line-height: 1.5;
+    margin-bottom: calc(var(--element-gap) * 0.75);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.content-slide li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #FF5722;
+    font-weight: bold;
+}
+
+.content-slide strong {
+    color: #FF5722;
+    font-weight: 700;
+}
+
+/* Highlight Box */
+.highlight-box {
+    background: rgba(255, 87, 34, 0.1);
+    border-left: 4px solid #FF5722;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    margin: var(--content-gap) 0;
+    border-radius: 8px;
+}
+
+/* Grid Layout */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--content-gap);
+    margin-top: var(--content-gap);
+}
+
+.grid-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Quote Slide */
+.quote-slide {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    text-align: center;
+}
+
+.quote-slide blockquote {
+    font-size: var(--h2-size);
+    font-family: 'Archivo Black', sans-serif;
+    color: #FF5722;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.3;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+.reveal:nth-child(1) { animation-delay: 0.1s; }
+.reveal:nth-child(2) { animation-delay: 0.2s; }
+.reveal:nth-child(3) { animation-delay: 0.3s; }
+.reveal:nth-child(4) { animation-delay: 0.4s; }
+.reveal:nth-child(5) { animation-delay: 0.5s; }
+.reveal:nth-child(6) { animation-delay: 0.6s; }
+
+/* Keyboard Hint */
+.keyboard-hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--small-size);
+    color: rgba(255, 255, 255, 0.4);
+    z-index: 1000;
+}
+    </style>
+</head>
+<body>
+
+<!-- Navigation Dots -->
+<div class="nav-dots">
+    <div class="nav-dot active" data-slide="0"></div>
+    <div class="nav-dot" data-slide="1"></div>
+    <div class="nav-dot" data-slide="2"></div>
+    <div class="nav-dot" data-slide="3"></div>
+    <div class="nav-dot" data-slide="4"></div>
+    <div class="nav-dot" data-slide="5"></div>
+    <div class="nav-dot" data-slide="6"></div>
+    <div class="nav-dot" data-slide="7"></div>
+    <div class="nav-dot" data-slide="8"></div>
+</div>
+
+<!-- Keyboard Hint -->
+<div class="keyboard-hint">使用 ↑↓ 或滚动浏览</div>
+
+<!-- Slide 1: Title -->
+<section class="slide title-slide">
+    <div class="title-card">
+        <h1>AI实战营第二节课<br>道法术器拆解</h1>
+        <div class="subtitle">
+            <strong>核心理念：一鱼多吃</strong><br>
+            每个动作都要有多重价值：钱+关系+技能+影响力
+        </div>
+        <div class="meta">
+            讲师：何锦成 | 主题：AI分身搭建 + 道法术器拆解器
+        </div>
+    </div>
+</section>
+
+<!-- Slide 2: 道 - 站在巨人的肩膀上 -->
+<section class="slide content-slide">
+    <div class="slide-number">01</div>
+    <div class="slide-content">
+        <h2 class="reveal">🌟 道：站在巨人的肩膀上</h2>
+        <p class="reveal">这不是一句鸡汤，这是做AI的底层方法。</p>
+        <div class="highlight-box reveal">
+            <p>我做AI分身的时候，去看小龙虾（Claude的开源项目），它是GitHub上星星最多的项目，我提取它的记忆机制。但我不能照搬，因为你们的额度烧不起。</p>
+            <p>所以我让我的Claude Code去GitHub和X上找大佬们分享的配置，看他们怎么设计架构。然后我把需求告诉AI：要有小龙虾那么强的记忆，但又要省token。</p>
+        </div>
+        <p class="reveal"><strong>这个方法适用于一切</strong>。你要做任何东西，先去看互联网上有没有人做过、分享过经验。不是让你抄，是让你理解底层逻辑，然后结合自己的需求去改造。</p>
+    </div>
+</section>
+
+<!-- Slide 3: 道 - 压缩和对齐 -->
+<section class="slide content-slide">
+    <div class="slide-number">02</div>
+    <div class="slide-content">
+        <h2 class="reveal">🌟 道：压缩和对齐贯穿一切</h2>
+        <p class="reveal">我们跟AI聊天，本质上在做两件事：<strong>对齐</strong>和<strong>压缩</strong>。</p>
+        <div class="grid-2">
+            <div class="grid-item reveal">
+                <h3>什么叫对齐？</h3>
+                <p>你学数学的极限概念，一开始不懂，你的认知跟教材没对齐。你去问AI，AI知道正确答案，你们不断交流，最后你懂了——这就是对齐。</p>
+            </div>
+            <div class="grid-item reveal">
+                <h3>什么叫压缩？</h3>
+                <p>这个过程可能花了几千字、上万字的对话。你聊了5万字，其中4.8万字都是磨损，你只需要保留2000字的精华。把最终的结论、核心的理解提炼出来，存成文件。</p>
+            </div>
+        </div>
+        <p class="reveal">这样下次开新对话，你直接把这个文件添加进去，AI就能延续之前的理解。<strong>这就是突破上下文限制的方法</strong>。</p>
+    </div>
+</section>
+
+<!-- Slide 4: 道 - 一鱼多吃 -->
+<section class="slide content-slide">
+    <div class="slide-number">03</div>
+    <div class="slide-content">
+        <h2 class="reveal">🌟 道：一鱼多吃</h2>
+        <p class="reveal">你做的每一个动作都要有多重价值。</p>
+        <p class="reveal">比如你帮同学解决了一个AI问题，你不能白帮。你要：</p>
+        <ul class="reveal">
+            <li>把解决过程记录下来，沉淀成工作流（<strong>技能</strong>）</li>
+            <li>让对方发个朋友圈感谢你（<strong>影响力</strong>）</li>
+            <li>收个10块20块服务费（<strong>钱</strong>）</li>
+            <li>跟对方建立连接（<strong>关系</strong>）</li>
+        </ul>
+        <div class="highlight-box reveal">
+            <p><strong>一个动作，四个维度的收获。这才叫高效。</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 5: 法 - 信息分析流程 -->
+<section class="slide content-slide">
+    <div class="slide-number">04</div>
+    <div class="slide-content">
+        <h2 class="reveal">📚 法：信息分析的通用流程</h2>
+        <p class="reveal">不管你是做自媒体、写论文、还是做任何研究，流程都是一样的：</p>
+        <div class="grid-2">
+            <div class="grid-item reveal">
+                <h3>1. 调研</h3>
+                <p>找对标、找参考资料</p>
+            </div>
+            <div class="grid-item reveal">
+                <h3>2. 清洗</h3>
+                <p>去掉垃圾数据、脏数据</p>
+            </div>
+            <div class="grid-item reveal">
+                <h3>3. 拆解</h3>
+                <p>看哪些部分可以学习</p>
+            </div>
+            <div class="grid-item reveal">
+                <h3>4. 生成</h3>
+                <p>根据自己情况生成方案</p>
+            </div>
+        </div>
+        <p class="reveal">这套方法是学术领域的信息分析，但它适用于一切。你调研了100个案例，筛选出10个最好的，拆解它们，最后生成你自己的方案。</p>
+    </div>
+</section>
+
+<!-- Slide 6: 法 - 道法术器分层 -->
+<section class="slide content-slide">
+    <div class="slide-number">05</div>
+    <div class="slide-content">
+        <h2 class="reveal">📚 法：道法术器分层思维</h2>
+        <ul class="reveal">
+            <li><strong>道</strong>：底层规律，不会变。比如"万事问AI"、"站在巨人肩膀上"</li>
+            <li><strong>法</strong>：方法论，很少变。比如信息分析流程、压缩对齐</li>
+            <li><strong>术</strong>：具体策略，经常变。比如"重要的话说三遍"这种提示词技巧</li>
+            <li><strong>器</strong>：工具本身，随时变。今天用Claude，明天可能换GPT</li>
+        </ul>
+        <div class="highlight-box reveal">
+            <p><strong>越往上越保值，越往下越容易过时</strong>。你要把精力放在学道和法上，术和器知道就行。</p>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 7: 术 - AI分身安装 -->
+<section class="slide content-slide">
+    <div class="slide-number">06</div>
+    <div class="slide-content">
+        <h2 class="reveal">⚡ 术：AI分身安装步骤</h2>
+        <ul class="reveal">
+            <li>下载安装包，解压到工作区文件夹</li>
+            <li>双击README文档，右键"添加至AI对话"</li>
+            <li>回答AI的问题：你是谁、做什么、目标是什么、目前困难是什么</li>
+            <li><strong>关键</strong>：每个问题至少回答1000字，越详细AI越了解你</li>
+            <li>用语音输入（豆包免费20小时），效率提升10倍</li>
+        </ul>
+        <div class="highlight-box reveal">
+            <h3>提示词小技巧</h3>
+            <ul>
+                <li><strong>重要的事说三遍</strong>：AI遵循概率会大幅提升</li>
+                <li><strong>明确告诉AI"记住这个想法"</strong>：否则它可能只是嘴上答应，没写进文件</li>
+                <li><strong>检查文件</strong>：AI说"记住了"，你要看它有没有真的写进文档，没写就是在骗你</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 8: 器 + 行动清单 -->
+<section class="slide content-slide">
+    <div class="slide-number">07</div>
+    <div class="slide-content">
+        <h2 class="reveal">🛠️ 器 + ✅ 今天就能做的三件事</h2>
+        <div class="grid-2">
+            <div class="grid-item reveal">
+                <h3>工具清单</h3>
+                <ul>
+                    <li>Claude Code - 最强AI编程工具</li>
+                    <li>牛马AI - 中转站</li>
+                    <li>豆包 - 免费语音输入</li>
+                    <li>拆解器skill - 内容提炼</li>
+                    <li>AI分身skill - 记忆系统</li>
+                </ul>
+            </div>
+            <div class="grid-item reveal">
+                <h3>立即行动</h3>
+                <ul>
+                    <li><strong>装好AI分身</strong> - 认真回答问题，每个至少1000字</li>
+                    <li><strong>装好拆解器</strong> - 找一篇文章拆解一遍试试</li>
+                    <li><strong>发朋友圈</strong> - 简单发几张截图，展示你在学AI</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 9: 金句 -->
+<section class="slide quote-slide">
+    <div class="slide-number">08</div>
+    <div class="slide-content">
+        <blockquote class="reveal">
+            "站在巨人的肩膀上，这不是鸡汤，这是做AI的底层方法。"
+        </blockquote>
+        <blockquote class="reveal">
+            "压缩和对齐贯穿一切。你跟AI聊天，本质就是在做这两件事。"
+        </blockquote>
+        <blockquote class="reveal">
+            "一鱼多吃。你做的每一个动作都要有多重价值：钱、关系、技能、影响力。"
+        </blockquote>
+    </div>
+</section>
+
+<script>
+// Navigation
+const slides = document.querySelectorAll('.slide');
+const navDots = document.querySelectorAll('.nav-dot');
+let currentSlide = 0;
+
+function updateNav() {
+    navDots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+}
+
+function goToSlide(index) {
+    if (index >= 0 && index < slides.length) {
+        currentSlide = index;
+        slides[index].scrollIntoView({ behavior: 'smooth' });
+        updateNav();
+    }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === ' ') {
+        e.preventDefault();
+        goToSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        goToSlide(currentSlide - 1);
+    }
+});
+
+// Dot navigation
+navDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => goToSlide(index));
+});
+
+// Scroll detection
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
+        slides.forEach((slide, index) => {
+            const slideTop = slide.offsetTop;
+            const slideBottom = slideTop + slide.offsetHeight;
+            if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
+                currentSlide = index;
+                updateNav();
+            }
+        });
+    }, 100);
+});
+
+// Initial state
+updateNav();
+</script>
+
+</body>
+</html>
