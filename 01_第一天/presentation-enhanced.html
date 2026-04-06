@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI实战营开营仪式 - 增强版演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+            cursor: none;
+            scroll-behavior: smooth;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide {
+            min-height: 100vh;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(2rem, 5vw, 4rem);
+            overflow: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00f5ff 0%, #ff00ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        p, li {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-style: italic;
+            text-align: center;
+            padding: 2rem;
+            border-left: 4px solid #00f5ff;
+            margin: 2rem 0;
+        }
+
+        ul {
+            list-style: none;
+            max-width: 900px;
+        }
+
+        li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #00f5ff;
+            font-size: 1.5em;
+        }
+
+        .highlight {
+            color: #00f5ff;
+            font-weight: 600;
+        }
+
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00f5ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+        }
+
+        .cursor-trail {
+            width: 8px;
+            height: 8px;
+            background: #ff00ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.6;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #00f5ff 0%, #ff00ff 100%);
+            z-index: 10000;
+            transition: width 0.1s ease;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 12px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="custom-cursor"></div>
+    <div class="scroll-progress"></div>
+    
+    <div class="container">
+        <!-- Slide 1: 标题页 -->
+        <section class="slide">
+            <h1 class="gradient-text">AI实战营开营仪式</h1>
+            <p class="subtitle">掌握AI时代的核心能力</p>
+            <p class="subtitle" style="margin-top: 2rem;">2024年3月27日</p>
+        </section>
+
+        <!-- Slide 2: 课程概览 -->
+        <section class="slide">
+            <h2 class="gradient-text">课程概览</h2>
+            <div class="content-box">
+                <ul>
+                    <li>课程时长：<span class="highlight">7天</span></li>
+                    <li>核心目标：从<span class="highlight">AI小白</span>到<span class="highlight">实战高手</span></li>
+                    <li>学习方式：理论 + 实战 + 社群互动</li>
+                    <li>适合人群：大学生、职场新人、创业者</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 3: 核心理念 -->
+        <section class="slide">
+            <h2 class="gradient-text">核心理念</h2>
+            <div class="content-box">
+                <p class="quote">"AI不是工具，是思维方式的革命"</p>
+                <ul>
+                    <li>不是学会使用ChatGPT</li>
+                    <li>而是<span class="highlight">重构你的思维模式</span></li>
+                    <li>建立AI时代的<span class="highlight">底层认知</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 4: AI时代底层认知 - 第一部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">AI时代的底层认知</h2>
+            <h3>1. 信息过载时代的生存法则</h3>
+            <div class="content-box">
+                <ul>
+                    <li>每天接收信息量 = 过去一年的信息量</li>
+                    <li>问题：<span class="highlight">信息焦虑</span> vs <span class="highlight">信息麻木</span></li>
+                    <li>解决方案：学会<span class="highlight">压缩信息</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 5: AI时代底层认知 - 第二部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">AI时代的底层认知</h2>
+            <h3>2. 从"搜索思维"到"对话思维"</h3>
+            <div class="content-box">
+                <ul>
+                    <li>传统：搜索引擎 → 筛选信息 → 自己整合</li>
+                    <li>AI时代：对话 → AI理解 → 直接给答案</li>
+                    <li>关键：<span class="highlight">会提问</span>比会搜索更重要</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 6: AI时代底层认知 - 第三部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">AI时代的底层认知</h2>
+            <h3>3. 人机协作的新范式</h3>
+            <div class="content-box">
+                <ul>
+                    <li>AI不是替代人，是<span class="highlight">放大人的能力</span></li>
+                    <li>你的价值 = 创意 × AI执行力</li>
+                    <li>未来竞争力：<span class="highlight">驾驭AI的能力</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 7: 核心方法论 - 压缩 -->
+        <section class="slide">
+            <h2 class="gradient-text">核心方法论：压缩</h2>
+            <div class="content-box">
+                <p class="quote">"信息的价值在于密度，不在于数量"</p>
+                <ul>
+                    <li>什么是压缩：提取<span class="highlight">核心信息</span>，去除噪音</li>
+                    <li>为什么重要：节省时间，提高决策质量</li>
+                    <li>如何实践：用AI做信息的"过滤器"</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 8: 压缩的三个层次 -->
+        <section class="slide">
+            <h2 class="gradient-text">压缩的三个层次</h2>
+            <div class="content-box">
+                <ul>
+                    <li><span class="highlight">信息压缩</span>：长文 → 摘要 → 金句</li>
+                    <li><span class="highlight">知识压缩</span>：碎片 → 体系 → 模型</li>
+                    <li><span class="highlight">认知压缩</span>：经验 → 原则 → 直觉</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 9: 压缩实战案例 -->
+        <section class="slide">
+            <h2 class="gradient-text">压缩实战案例</h2>
+            <div class="content-box">
+                <h3>案例：处理一篇10000字的行业报告</h3>
+                <ul>
+                    <li>传统方式：花2小时阅读，记笔记</li>
+                    <li>AI方式：5分钟让AI提取核心观点</li>
+                    <li>结果：<span class="highlight">效率提升24倍</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 10: 核心方法论 - 对齐 -->
+        <section class="slide">
+            <h2 class="gradient-text">核心方法论：对齐</h2>
+            <div class="content-box">
+                <p class="quote">"AI的输出质量 = 你的输入质量"</p>
+                <ul>
+                    <li>什么是对齐：让AI<span class="highlight">理解你的真实需求</span></li>
+                    <li>为什么重要：避免"答非所问"</li>
+                    <li>如何实践：精准提问 + 上下文管理</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 11: 对齐的四个要素 -->
+        <section class="slide">
+            <h2 class="gradient-text">对齐的四个要素</h2>
+            <div class="content-box">
+                <ul>
+                    <li><span class="highlight">目标对齐</span>：明确你要什么结果</li>
+                    <li><span class="highlight">角色对齐</span>：让AI扮演合适的角色</li>
+                    <li><span class="highlight">风格对齐</span>：定义输出的格式和风格</li>
+                    <li><span class="highlight">标准对齐</span>：设定质量评判标准</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 12: 对齐实战案例 -->
+        <section class="slide">
+            <h2 class="gradient-text">对齐实战案例</h2>
+            <div class="content-box">
+                <h3>错误提问 vs 正确提问</h3>
+                <p style="color: #ff6b6b;">错误："帮我写一篇文章"</p>
+                <p style="color: #51cf66; margin-top: 1rem;">正确："你是一位资深科技记者，帮我写一篇800字的文章，主题是AI对教育的影响，面向大学生读者，语气轻松但专业，包含3个真实案例"</p>
+            </div>
+        </section>
+        <!-- Slide 13: 正确的AI使用方式 - 第一部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">正确的AI使用方式</h2>
+            <h3>1. 把AI当成"思维伙伴"</h3>
+            <div class="content-box">
+                <ul>
+                    <li>不是：让AI直接给答案</li>
+                    <li>而是：和AI<span class="highlight">一起思考</span></li>
+                    <li>方法：多轮对话，逐步深入</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 14: 正确的AI使用方式 - 第二部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">正确的AI使用方式</h2>
+            <h3>2. 建立"提示词库"</h3>
+            <div class="content-box">
+                <ul>
+                    <li>收集高质量的提示词模板</li>
+                    <li>针对不同场景定制提示词</li>
+                    <li>不断迭代优化你的提示词</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 15: 正确的AI使用方式 - 第三部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">正确的AI使用方式</h2>
+            <h3>3. 培养"AI审美"</h3>
+            <div class="content-box">
+                <ul>
+                    <li>能分辨AI输出的<span class="highlight">好坏</span></li>
+                    <li>知道什么时候该用AI，什么时候不该用</li>
+                    <li>理解AI的<span class="highlight">能力边界</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 16: 实战工具 -->
+        <section class="slide">
+            <h2 class="gradient-text">实战工具与技能</h2>
+            <div class="content-box">
+                <ul>
+                    <li><span class="highlight">ChatGPT</span>：通用对话AI</li>
+                    <li><span class="highlight">Claude</span>：长文本处理专家</li>
+                    <li><span class="highlight">Midjourney</span>：AI绘画工具</li>
+                    <li><span class="highlight">Notion AI</span>：笔记与知识管理</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 17: 大学生应用场景 - 学习 -->
+        <section class="slide">
+            <h2 class="gradient-text">大学生应用场景</h2>
+            <h3>1. 学习效率提升</h3>
+            <div class="content-box">
+                <ul>
+                    <li>课程笔记整理与总结</li>
+                    <li>论文阅读与文献综述</li>
+                    <li>知识点串联与记忆</li>
+                    <li>考前复习计划制定</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 18: 大学生应用场景 - 作业 -->
+        <section class="slide">
+            <h2 class="gradient-text">大学生应用场景</h2>
+            <h3>2. 作业与项目</h3>
+            <div class="content-box">
+                <ul>
+                    <li>论文写作辅助（<span class="highlight">不是代写！</span>）</li>
+                    <li>代码调试与优化</li>
+                    <li>PPT大纲与内容生成</li>
+                    <li>小组项目协作</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 19: 大学生应用场景 - 求职 -->
+        <section class="slide">
+            <h2 class="gradient-text">大学生应用场景</h2>
+            <h3>3. 求职准备</h3>
+            <div class="content-box">
+                <ul>
+                    <li>简历优化与个性化</li>
+                    <li>面试问题准备</li>
+                    <li>行业信息研究</li>
+                    <li>职业规划建议</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 20: 大学生应用场景 - 生活 -->
+        <section class="slide">
+            <h2 class="gradient-text">大学生应用场景</h2>
+            <h3>4. 日常生活</h3>
+            <div class="content-box">
+                <ul>
+                    <li>时间管理与计划制定</li>
+                    <li>健身与饮食建议</li>
+                    <li>旅行攻略规划</li>
+                    <li>个人成长指导</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 21: 副业变现思路 - 第一部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">副业变现思路</h2>
+            <h3>1. 内容创作</h3>
+            <div class="content-box">
+                <ul>
+                    <li>用AI辅助写公众号文章</li>
+                    <li>制作小红书/抖音脚本</li>
+                    <li>设计图文内容</li>
+                    <li>月收入潜力：<span class="highlight">3000-10000元</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 22: 副业变现思路 - 第二部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">副业变现思路</h2>
+            <h3>2. 技能服务</h3>
+            <div class="content-box">
+                <ul>
+                    <li>AI工具培训</li>
+                    <li>提示词定制服务</li>
+                    <li>AI辅助设计/编程</li>
+                    <li>月收入潜力：<span class="highlight">5000-20000元</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 23: 副业变现思路 - 第三部分 -->
+        <section class="slide">
+            <h2 class="gradient-text">副业变现思路</h2>
+            <h3>3. 产品开发</h3>
+            <div class="content-box">
+                <ul>
+                    <li>开发AI小工具/插件</li>
+                    <li>制作提示词模板包</li>
+                    <li>搭建AI应用网站</li>
+                    <li>月收入潜力：<span class="highlight">10000+元</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 24: 关键金句 1 -->
+        <section class="slide">
+            <p class="quote gradient-text">"AI时代，最大的风险不是被AI替代，而是被会用AI的人替代"</p>
+        </section>
+
+        <!-- Slide 25: 关键金句 2 -->
+        <section class="slide">
+            <p class="quote gradient-text">"不要问AI能做什么，要问你能用AI做什么"</p>
+        </section>
+
+        <!-- Slide 26: 关键金句 3 -->
+        <section class="slide">
+            <p class="quote gradient-text">"信息的价值在于密度，不在于数量"</p>
+        </section>
+
+        <!-- Slide 27: 关键金句 4 -->
+        <section class="slide">
+            <p class="quote gradient-text">"AI的输出质量 = 你的输入质量"</p>
+        </section>
+
+        <!-- Slide 28: 行动清单 - 第一天 -->
+        <section class="slide">
+            <h2 class="gradient-text">行动清单</h2>
+            <h3>今天就开始</h3>
+            <div class="content-box">
+                <ul>
+                    <li>注册并熟悉ChatGPT/Claude</li>
+                    <li>尝试用AI总结一篇长文</li>
+                    <li>建立你的第一个提示词模板</li>
+                    <li>在社群分享你的实践</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 29: 行动清单 - 本周 -->
+        <section class="slide">
+            <h2 class="gradient-text">行动清单</h2>
+            <h3>本周目标</h3>
+            <div class="content-box">
+                <ul>
+                    <li>完成7天课程学习</li>
+                    <li>每天至少1个AI实战练习</li>
+                    <li>建立个人AI工具库</li>
+                    <li>找到1个可以变现的方向</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 30: 结束页 -->
+        <section class="slide">
+            <h1 class="gradient-text">开启你的AI之旅</h1>
+            <p class="subtitle">7天后，你将成为AI实战高手</p>
+            <p class="subtitle" style="margin-top: 2rem; opacity: 0.7;">让我们一起，用AI改变世界</p>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00f5ff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#00f5ff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const trails = [];
+        const trailCount = 5;
+
+        for (let i = 0; i < trailCount; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trails.push({ element: trail, x: 0, y: 0 });
+        }
+
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.2;
+            cursorY += (mouseY - cursorY) * 0.2;
+            
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+
+            trails.forEach((trail, index) => {
+                trail.x += (mouseX - trail.x) * (0.1 - index * 0.015);
+                trail.y += (mouseY - trail.y) * (0.1 - index * 0.015);
+                trail.element.style.left = trail.x + 'px';
+                trail.element.style.top = trail.y + 'px';
+            });
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / scrollHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for slide animations
+        const slides = document.querySelectorAll('.slide');
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px'
+        };
+
+        const slideObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => {
+            slide.style.opacity = '0';
+            slide.style.transform = 'translateY(30px)';
+            slide.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            slideObserver.observe(slide);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const currentSlide = Array.from(slides).find(slide => {
+                const rect = slide.getBoundingClientRect();
+                return rect.top >= 0 && rect.top < window.innerHeight / 2;
+            });
+
+            if (!currentSlide) return;
+
+            const currentIndex = Array.from(slides).indexOf(currentSlide);
+
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                if (currentIndex < slides.length - 1) {
+                    slides[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                if (currentIndex > 0) {
+                    slides[currentIndex - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                slides[0].scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                slides[slides.length - 1].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
